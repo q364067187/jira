@@ -1,0 +1,67 @@
+1. 安装create-react-app
+    可看这篇
+    https://www.jianshu.com/p/77bf3944b0f4
+
+    # 全局安装
+    cnpm i -g create-react-app
+
+    # 构建一个my-app的项目
+    npx create-react-app my-app
+    cd my-app
+    如果是typescript，则：
+    npx create-react-app jira --template typescript
+
+    # 启动编译当前的React项目，并自动打开 http://localhost:3000/
+    yarn start
+
+2. 配置tsconfig.json
+    这是typescript的配置文件
+    将页面引用绝对路径修改：
+    "baseUrl": "./src",
+
+3. 配置prettier，规范提交时代码格式化
+    可看这篇
+    https://prettier.io/docs/en/install.html
+
+    # 项目中安装prettier
+    cnpm i --save-dev --save-exact prettier
+
+    # 项目中创建prettier配置文件
+    echo {}> .prettierrc.json
+
+    # 项目中创建prettier忽略格式化文件
+    echo > .prettierignore
+    在此文件夹中添加忽略文件夹：
+    # Ignore artifacts:
+    build
+    coverage
+
+    # 安装保存前格式化插件
+    npx mrm lint-staged
+    如果这个报错，参见
+    https://www.notion.so/2-2-prettier-commitlint-db637fe559b44dbe9a967bd4c1399282
+    cnpm i -D husky
+    npx husky add .husky/pre-commit "yarn lint-staged"
+
+    # prettier和eslint一起使用有一些冲突，所以要安装：
+    cnpm i -D eslint-config-prettier
+
+    # 修改eslintConfig
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest",
+            "prettier"
+        ]
+    },
+    代表用prettier的规则覆盖了一部分的eslint的规则，以保证互相正常工作
+
+    # git提交时检查提交msg是否符合规范，如果不符合规范，就让提交失败
+    https://github.com/conventional-changelog/commitlint
+
+    cnpm i -D @commitlint/{config-conventional,cli}
+    # Configure commitlint to use conventional config
+    echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+
+    一些git提交的信息规范
+    https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional
