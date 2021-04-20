@@ -111,5 +111,5 @@
     项目根目录新建 __json_server_mock__ 文件夹，代表和项目无关，只是数据
     在此文件夹中新建db.json
     在package.json中新建脚本
-    "json-server": "json-server __json_server_mock__/db.json --watch"
+    "json-server": "json-server __json_server_mock__/db.json --watch --port 3001"
     运行此命令即可
