@@ -90,3 +90,26 @@
     https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional
     介绍
     https://blog.csdn.net/liuyan19891230/article/details/105743098/
+
+4. 配置jsonServer
+    安装
+    cnpm i -g json-server
+
+    新建db.json
+    {
+        "users": []
+    }
+
+    开启
+    json-server --watch db.json
+
+    可以用postman增删改查
+
+    安装在项目
+    cnpm i -D json-server
+
+    项目根目录新建 __json_server_mock__ 文件夹，代表和项目无关，只是数据
+    在此文件夹中新建db.json
+    在package.json中新建脚本
+    "json-server": "json-server __json_server_mock__/db.json --watch"
+    运行此命令即可
