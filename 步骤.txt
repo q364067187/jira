@@ -88,3 +88,5 @@
 
     一些git提交的信息规范
     https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional
+    介绍
+    https://blog.csdn.net/liuyan19891230/article/details/105743098/
