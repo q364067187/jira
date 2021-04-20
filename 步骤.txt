@@ -38,10 +38,33 @@
 
     # 安装保存前格式化插件
     npx mrm lint-staged
-    如果这个报错，参见
-    https://www.notion.so/2-2-prettier-commitlint-db637fe559b44dbe9a967bd4c1399282
-    cnpm i -D husky
-    npx husky add .husky/pre-commit "yarn lint-staged"
+    如果这个报错，将以下存入
+    "devDependencies": {
+        ...
+        "husky": ">=6",
+        "lint-staged": ">=10",
+        ...
+    }
+    在根目录下创建.husky文件夹，保存一些git钩子配置
+    pre-commit文件：
+    #!/bin/sh
+    . "$(dirname "$0")/_/husky.sh"
+
+    npx lint-staged
+
+    commit-msg文件：
+    #!/bin/sh
+    . "$(dirname "$0")/_/husky.sh"
+
+    yarn commitlint --edit 
+
+
+    再添加脚本
+    "scripts": {
+        ...
+        "prepare": "husky install"
+    },
+    开始安装
 
     # prettier和eslint一起使用有一些冲突，所以要安装：
     cnpm i -D eslint-config-prettier
