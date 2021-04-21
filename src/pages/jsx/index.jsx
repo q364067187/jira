@@ -15,7 +15,6 @@ export default () => {
     const [users, setUsers] = useState([])
 
     useEffect(async () => {
-        console.log(param)
         const res = await fetch(`${apiUrl}/projects?${qs.stringify(cleanObj(param))}`);
         if(res.ok){
             const results = await res.json();
