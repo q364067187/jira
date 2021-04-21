@@ -6,7 +6,7 @@ import qs from "qs";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export default () => {
+const ProductList = () => {
   const [param, setParam] = useState({
     name: "",
     personId: "",
@@ -14,22 +14,24 @@ export default () => {
   const [list, setList] = useState([]);
   const [users, setUsers] = useState([]);
 
-  useEffect(async () => {
-    const res = await fetch(
-      `${apiUrl}/projects?${qs.stringify(cleanObj(param))}`
+  useEffect(() => {
+    fetch(`${apiUrl}/projects?${qs.stringify(cleanObj(param))}`).then(
+      async (res) => {
+        if (res.ok) {
+          const results = await res.json();
+          setList(results);
+        }
+      }
     );
-    if (res.ok) {
-      const results = await res.json();
-      setList(results);
-    }
   }, [param]);
 
-  useEffect(async () => {
-    const res = await fetch(`${apiUrl}/users`);
-    if (res.ok) {
-      const results = await res.json();
-      setUsers(results);
-    }
+  useEffect(() => {
+    fetch(`${apiUrl}/users`).then(async (res) => {
+      if (res.ok) {
+        const results = await res.json();
+        setUsers(results);
+      }
+    });
   }, []);
 
   return (
@@ -39,3 +41,5 @@ export default () => {
     </div>
   );
 };
+
+export default ProductList;
