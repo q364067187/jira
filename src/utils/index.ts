@@ -28,3 +28,25 @@ export const useDebounce = <V>(value: V, delay?: number) => {
 
   return debounceValue;
 };
+
+// 4-6 作业练习 - 用 Hook + TS + TS泛型实现useArray
+export const useArray = <V>(persons: V[]) => {
+  const [newPersons, setNewPersons] = useState(persons);
+  const clear = () => {
+    setNewPersons([]);
+  };
+  const removeIndex = (index: number) => {
+    const values = [...newPersons];
+    values.splice(index, 1);
+    setNewPersons(values);
+  };
+  const add = (person: V) => {
+    setNewPersons([...newPersons, person]);
+  };
+  return {
+    value: newPersons,
+    clear,
+    removeIndex,
+    add,
+  };
+};
