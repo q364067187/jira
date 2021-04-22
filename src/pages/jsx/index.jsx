@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Search from "pages/jsx/search";
 import List from "pages/jsx/list";
-import { cleanObj } from "utils/index";
+import { cleanObj, useMount, useDebounce } from "utils/index";
 import qs from "qs";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -23,16 +23,16 @@ const ProductList = () => {
         }
       }
     );
-  }, [param]);
+  }, [useDebounce(param, 1000)]);
 
-  useEffect(() => {
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async (res) => {
       if (res.ok) {
         const results = await res.json();
         setUsers(results);
       }
     });
-  }, []);
+  });
 
   return (
     <div>
