@@ -14,6 +14,8 @@ const ProductList = () => {
   const [list, setList] = useState([]);
   const [users, setUsers] = useState([]);
 
+  const debounceParam = useDebounce(param, 200);
+
   useEffect(() => {
     fetch(`${apiUrl}/projects?${qs.stringify(cleanObj(param))}`).then(
       async (res) => {
@@ -23,7 +25,7 @@ const ProductList = () => {
         }
       }
     );
-  }, [useDebounce(param, 1000)]);
+  }, [debounceParam]);
 
   useMount(() => {
     fetch(`${apiUrl}/users`).then(async (res) => {
