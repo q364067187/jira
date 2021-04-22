@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
 
-export const cleanObj = (obj) => {
+export const cleanObj = (obj: object) => {
   const o = Object.assign({}, obj);
   Object.keys(o).forEach((i) => {
-    if (obj[i] == null || obj[i] === "") {
+    // @ts-ignore
+    if (o[i] == null || o[i] === "") {
+      // @ts-ignore
       delete o[i];
     }
   });
   return o;
 };
 
-export const useMount = (callback) => {
+export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
   }, []);
 };
 
-export const useDebounce = (value, delay) => {
+export const useDebounce = (value: unknown, delay?: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
 
   useEffect(() => {

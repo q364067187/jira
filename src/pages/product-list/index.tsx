@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Search from "pages/jsx/search";
-import List from "pages/jsx/list";
-import { cleanObj, useMount, useDebounce } from "utils/index";
+import Search from "pages/product-list-jsx/search";
+import List from "pages/product-list-jsx/list";
+import { cleanObj, useMount, useDebounce } from "utils/";
 import qs from "qs";
 
 const apiUrl = process.env.REACT_APP_API_URL;
