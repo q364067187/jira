@@ -1,18 +1,9 @@
+import { login } from "auth-provider";
 import { FormEvent } from "react";
-const apiUrl = process.env.REACT_APP_API_URL;
 
 const Login = () => {
   const postLogin = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (res) => {
-      if (res.ok) {
-      }
-    });
+    login(param);
   };
 
   const submitHandle = (event: FormEvent<HTMLFormElement>) => {
