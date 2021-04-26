@@ -3,10 +3,12 @@ import Search from "pages/product-list-jsx/search";
 import List from "pages/product-list-jsx/list";
 import { cleanObj, useMount, useDebounce } from "utils/";
 import qs from "qs";
+import { useAuth } from "contexts/auth";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const ProductList = () => {
+  const { user, logout } = useAuth();
   const [param, setParam] = useState({
     name: "",
     personId: "",
@@ -38,6 +40,11 @@ const ProductList = () => {
 
   return (
     <div>
+      {user && (
+        <div>
+          Hi! {user.name} <button onClick={logout}>登出</button>
+        </div>
+      )}
       <Search users={users} param={param} setParam={setParam} />
       <List list={list} users={users} />
     </div>

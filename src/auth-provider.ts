@@ -9,30 +9,40 @@ const handleUserResponse = ({ user }: { user: User }) => {
   return user;
 };
 
-export const login = (param: { username: string; password: string }) => {
-  fetch(`${apiUrl}/login`, {
+// 登录
+export const login = async (param: { username: string; password: string }) => {
+  const res = await fetch(`${apiUrl}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(param),
-  }).then(async (res) => {
-    if (res.ok) {
-      return handleUserResponse(await res.json());
-    }
   });
+  if (res.ok) {
+    return handleUserResponse(await res.json());
+  } else {
+    return Promise.reject(await res.json());
+  }
 };
 
-export const register = (param: { username: string; password: string }) => {
-  fetch(`${apiUrl}/register`, {
+// 注册
+export const register = async (param: {
+  username: string;
+  password: string;
+}) => {
+  const res = await fetch(`${apiUrl}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(param),
-  }).then(async (res) => {
-    if (res.ok) {
-      return handleUserResponse(await res.json());
-    }
   });
+  if (res.ok) {
+    return handleUserResponse(await res.json());
+  } else {
+    return Promise.reject(await res.json());
+  }
 };
+
+// 登出
+export const logout = async () => localStorage.removeItem(localStorageKey);

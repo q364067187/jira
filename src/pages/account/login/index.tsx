@@ -1,7 +1,8 @@
-import { login } from "auth-provider";
+import { useAuth } from "contexts/auth";
 import { FormEvent } from "react";
 
 const Login = () => {
+  const { login } = useAuth();
   const postLogin = (param: { username: string; password: string }) => {
     login(param);
   };
@@ -25,6 +26,7 @@ const Login = () => {
       </div>
       <div>
         <button type="submit">登录</button>
+        <button>切换到注册</button>
       </div>
     </form>
   );
