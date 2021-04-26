@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import Search from "pages/product-list-jsx/search";
 import List from "pages/product-list-jsx/list";
-import { cleanObj, useMount, useDebounce } from "utils/";
-import qs from "qs";
+import { useMount, useDebounce } from "utils/";
 import { useAuth } from "contexts/auth";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { http } from "hooks/useHttp";
 
 const ProductList = () => {
   const { user, logout } = useAuth();
@@ -19,23 +17,13 @@ const ProductList = () => {
   const debounceParam = useDebounce(param, 200);
 
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObj(param))}`).then(
-      async (res) => {
-        if (res.ok) {
-          const results = await res.json();
-          setList(results);
-        }
-      }
-    );
+    http("projects", {
+      data: param,
+    }).then(setList);
   }, [debounceParam]);
 
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (res) => {
-      if (res.ok) {
-        const results = await res.json();
-        setUsers(results);
-      }
-    });
+    http("users").then(setUsers);
   });
 
   return (
