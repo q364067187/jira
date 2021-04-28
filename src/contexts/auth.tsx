@@ -2,11 +2,23 @@ import React, { ReactNode, useContext, useEffect, useState } from "react";
 
 import * as auth from "auth-provider";
 import { User } from "pages/product-list/list";
+import { http } from "hooks/useHttp";
 
 interface AuthForm {
   username: string;
   password: string;
 }
+
+const bootstrapUser = async () => {
+  let user = null;
+  // 先获取token
+  const token = auth.getToken() || "";
+  if (token) {
+    const data = await http("me", { token });
+    user = data.user;
+  }
+  return user;
+};
 
 const AuthContext = React.createContext<
   | {
@@ -23,11 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // 先获取token
-    const token = auth.getToken() || "";
-    setUser({
-      token,
-    });
+    bootstrapUser().then(setUser);
   }, []);
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
