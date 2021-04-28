@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 
 import * as auth from "auth-provider";
 import { User } from "pages/product-list/list";
@@ -21,6 +21,15 @@ AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // 先获取token
+    const token = auth.getToken() || "";
+    setUser({
+      token,
+    });
+  }, []);
+
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));

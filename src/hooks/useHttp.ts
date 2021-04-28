@@ -1,7 +1,7 @@
-import { useAuth } from "contexts/auth";
 import qs from "qs";
-// import { useState } from "react";
+import { useAuth } from "contexts/auth";
 import { cleanObj } from "utils";
+import { config } from "node:process";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 interface Config extends RequestInit {
@@ -13,9 +13,6 @@ export const http = async (
   url: string,
   { token, data, headers, ...customConfig }: Config = {}
 ) => {
-  if (!token) {
-    token = localStorage.getItem("__auth_provider_token__") || "";
-  }
   const config = {
     method: "GET",
     headers: {
@@ -42,5 +39,10 @@ export const http = async (
   } else {
     return Promise.reject(result);
   }
-  return res;
+};
+
+export const useHttp = () => {
+  const { user } = useAuth();
+  return (...[url, config]: Parameters<typeof http>) =>
+    http(url, { ...config, token: user?.token });
 };

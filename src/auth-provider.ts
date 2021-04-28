@@ -9,6 +9,9 @@ const handleUserResponse = ({ user }: { user: User }) => {
   return user;
 };
 
+// 获取token
+export const getToken = () => window.localStorage.getItem(localStorageKey);
+
 // 登录
 export const login = async (param: { username: string; password: string }) => {
   const res = await fetch(`${apiUrl}/login`, {

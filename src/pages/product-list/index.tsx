@@ -3,7 +3,7 @@ import Search from "pages/product-list-jsx/search";
 import List from "pages/product-list-jsx/list";
 import { useMount, useDebounce } from "utils/";
 import { useAuth } from "contexts/auth";
-import { http } from "hooks/useHttp";
+import { useHttp } from "hooks/useHttp";
 
 const ProductList = () => {
   const { user, logout } = useAuth();
@@ -16,14 +16,16 @@ const ProductList = () => {
 
   const debounceParam = useDebounce(param, 200);
 
+  const client = useHttp();
+
   useEffect(() => {
-    http("projects", {
+    client("projects", {
       data: param,
     }).then(setList);
   }, [debounceParam]);
 
   useMount(() => {
-    http("users").then(setUsers);
+    client("users").then(setUsers);
   });
 
   return (
