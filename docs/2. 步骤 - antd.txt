@@ -1,0 +1,43 @@
+1. 安装antd
+    cnpm i -S antd
+
+2. 入口ts文件引入antd样式
+    import 'antd/dist/antd.less
+    要在jira-dev-tool后面,因为这个tool也是引用了antd样式,我们要改antd默认主题,所以放在tool后面,以覆盖tool中的样式
+
+3. 安装CRACO
+    对create react app安装一些默认的配置
+    cnpm i -D @craco/craco
+
+    /* package.json */
+    "scripts": {
+    -   "start": "react-scripts start",
+    -   "build": "react-scripts build",
+    -   "test": "react-scripts test",
+    +   "start": "craco start",
+    +   "build": "craco build",
+    +   "test": "craco test",
+    }
+
+    然后在项目根目录创建一个 craco.config.js 用于修改默认配置。
+    安装craco-less
+    cnpm i -D craco-less
+
+    /* craco.config.js */
+    const CracoLessPlugin = require('craco-less');
+
+    module.exports = {
+    plugins: [
+        {
+        plugin: CracoLessPlugin,
+        options: {
+            lessLoaderOptions: {
+            lessOptions: {
+                modifyVars: { '@primary-color': '#1DA57A' },
+                javascriptEnabled: true,
+            },
+            },
+        },
+        },
+    ],
+    };
