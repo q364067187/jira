@@ -1,0 +1,5 @@
+1. 安装emotion
+    cnpm i -D @emotion/react @emotion/styled
+
+2. 安装vscode插件,以支持代码提示
+    vscode-styled-components
