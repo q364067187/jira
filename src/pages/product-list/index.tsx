@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Search from "pages/product-list-jsx/search";
-import List from "pages/product-list-jsx/list";
+import Search from "./search";
+import List from "./list";
 import { useMount, useDebounce } from "utils/";
 import { useAuth } from "contexts/auth";
 import { useHttp } from "hooks/useHttp";

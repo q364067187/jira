@@ -1,5 +1,6 @@
 import { useAuth } from "contexts/auth";
 import { FormEvent } from "react";
+import { Button, Card, Form, Input } from "antd";
 
 const Login = () => {
   const { login } = useAuth();
@@ -7,28 +8,33 @@ const Login = () => {
     login(param);
   };
 
-  const submitHandle = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const username = (event.currentTarget.elements[0] as HTMLFormElement).value;
-    const password = (event.currentTarget.elements[1] as HTMLFormElement).value;
-    postLogin({ username, password });
+  const submitHandle = (values: { username: string; password: string }) => {
+    postLogin(values);
   };
 
   return (
-    <form onSubmit={submitHandle}>
-      <div>
-        <label htmlFor="username">用户名</label>
-        <input type="text" id="username" />
-      </div>
-      <div>
-        <label htmlFor="password">密码</label>
-        <input type="password" id="password" />
-      </div>
-      <div>
-        <button type="submit">登录</button>
-        <button>切换到注册</button>
-      </div>
-    </form>
+    <Card>
+      <Form onFinish={submitHandle}>
+        <Form.Item
+          name="username"
+          rules={[{ required: true, message: "请输入用户名" }]}
+        >
+          <Input placeholder="用户名" type="text" id="username" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "请输入密码" }]}
+        >
+          <Input placeholder="密码" type="password" id="password" />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit" type="primary">
+            登录
+          </Button>
+          <Button>切换到注册</Button>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 };
 

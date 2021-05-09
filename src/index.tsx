@@ -7,6 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 import { loadDevTools } from "jira-dev-tool";
 import { AppProvider } from "contexts";
 
+// 引入antd样式, 务必在jira-dev-tool后面引入
+import "antd/dist/antd.less";
+
 loadDevTools(() =>
   ReactDOM.render(
     <React.StrictMode>

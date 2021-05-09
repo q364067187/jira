@@ -1,3 +1,5 @@
+import { Table } from "antd";
+
 interface Project {
   id: number;
   name: string;
@@ -17,25 +19,24 @@ interface ListProps {
 
 const List = ({ list, users }: ListProps) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>项目</th>
-          <th>负责人</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((project: Project) => (
-          <tr key={project.id}>
-            <td>{project.name}</td>
-            <td>
-              {users.find((user) => user.id === project.personId)?.name ||
-                "未知"}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table
+      pagination={false}
+      columns={[
+        {
+          title: "项目",
+          dataIndex: "name",
+          sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
+          title: "负责人",
+          dataIndex: "personId",
+          render: (value, record) => {
+            return users.find((user) => user.id === value)?.name || "未知";
+          },
+        },
+      ]}
+      dataSource={list}
+    />
   );
 };
 
