@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 
-export const cleanObj = (obj: object) => {
-  const o = Object.assign({}, obj);
+export const cleanObj = (obj?: { [key: string]: unknown }) => {
+  if (!obj) {
+    return {};
+  }
+  const o = { ...obj };
   Object.keys(o).forEach((i) => {
-    // @ts-ignore
     if (o[i] == null || o[i] === "") {
-      // @ts-ignore
       delete o[i];
     }
   });
@@ -15,6 +16,7 @@ export const cleanObj = (obj: object) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

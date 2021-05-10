@@ -1,5 +1,4 @@
 import { useAuth } from "contexts/auth";
-import { FormEvent } from "react";
 import { Button, Card, Divider, Form, Input } from "antd";
 import styled from "@emotion/styled";
 import logo from "assets/logo.svg";

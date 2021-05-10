@@ -1,0 +1,32 @@
+1. 安装jira-dev-tool
+    cnpm i -D jira-dev-tool@next
+
+2. 入口tsx文件中引入
+    import { loadServer, DevTools } from "jira-dev-tool";
+
+    loadServer(() =>
+        ReactDOM.render(
+            <React.StrictMode>
+                <AppProvider>
+                    <DevTools />
+                    <App />
+                </AppProvider>
+            </React.StrictMode>,
+            document.getElementById("root")
+        )
+    );
+
+3. 安装react-query
+    cnpm i -S react-query
+
+4. AppProvider修改
+    import { ReactNode } from "react";
+    import { AuthProvider } from "./auth";
+    import { QueryClient, QueryClientProvider } from 'react-query';
+
+    export const AppProvider = ({ children }: { children: ReactNode }) => {
+    return 
+        <QueryClientProvider client={new QueryClient()}>
+            <AuthProvider>{children}</AuthProvider>
+        </QueryClientProvider>
+    };

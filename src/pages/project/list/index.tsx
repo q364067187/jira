@@ -3,7 +3,6 @@ import Search from "./search";
 import List from "./list";
 import { useMount, useDebounce } from "utils/";
 import { useHttp } from "hooks/useHttp";
-import { Row } from "components/lib";
 import styled from "@emotion/styled";
 
 const ProductList = () => {
@@ -22,6 +21,7 @@ const ProductList = () => {
     client("projects", {
       data: param,
     }).then(setList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceParam]);
 
   useMount(() => {

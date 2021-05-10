@@ -1,12 +1,11 @@
 import qs from "qs";
 import { useAuth } from "contexts/auth";
 import { cleanObj } from "utils";
-import { config } from "node:process";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 interface Config extends RequestInit {
   token?: string;
-  data?: object;
+  data?: { [key: string]: unknown };
 }
 
 export const http = async (

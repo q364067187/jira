@@ -24,6 +24,7 @@ const List = ({ list, users }: ListProps) => {
   return (
     <Table
       pagination={false}
+      rowKey="id"
       columns={[
         {
           title: "项目",
