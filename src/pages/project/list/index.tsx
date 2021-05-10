@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import Search from "./search";
 import List from "./list";
 import { useMount, useDebounce } from "utils/";
-import { useAuth } from "contexts/auth";
 import { useHttp } from "hooks/useHttp";
+import { Row } from "components/lib";
+import styled from "@emotion/styled";
 
 const ProductList = () => {
-  const { user, logout } = useAuth();
   const [param, setParam] = useState({
     name: "",
     personId: "",
@@ -29,16 +29,14 @@ const ProductList = () => {
   });
 
   return (
-    <div>
-      {user && (
-        <div>
-          Hi! {user.name} <button onClick={logout}>登出</button>
-        </div>
-      )}
+    <Container>
+      <h1>项目列表</h1>
       <Search users={users} param={param} setParam={setParam} />
       <List list={list} users={users} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div``;
 
 export default ProductList;

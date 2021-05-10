@@ -1,7 +1,7 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 
 import * as auth from "auth-provider";
-import { User } from "pages/product-list/list";
+import { User } from "pages/project/list/list";
 import { http } from "hooks/useHttp";
 
 interface AuthForm {

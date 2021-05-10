@@ -1,21 +1,11 @@
-// import OldHome from "pages/old-home";
-// import ProjectList from "pages/product-list-jsx/index";
-import ProjectList from "pages/product-list/index";
-
-// import PageUseArray from "pages/work-pages/use-array";
-
+// 总页面
 import { useAuth } from "contexts/auth";
 import Login from "pages/account/login";
+import Project from "pages/project";
 
-function App() {
+const App = () => {
   const { user } = useAuth();
-  return (
-    <div>
-      {/* <OldHome /> */}
-      {/* <PageUseArray /> */}
-      {user ? <ProjectList /> : <Login />}
-    </div>
-  );
-}
+  return <div>{user ? <Project /> : <Login />}</div>;
+};
 
 export default App;
