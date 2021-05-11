@@ -3,7 +3,7 @@ import { Project } from "types/project";
 import { useAsync } from "hooks/useAsync";
 import { useHttp } from "hooks/useHttp";
 
-export const useProject = (param?: Partial<Project>) => {
+export const useProjects = (param?: Partial<Project>) => {
   const { run, ...result } = useAsync<Project[]>();
   const client = useHttp();
 

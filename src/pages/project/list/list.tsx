@@ -1,12 +1,7 @@
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import { Project } from "types/project";
-
-export interface User {
-  id?: number;
-  name?: string;
-  token?: string;
-}
+import { User } from "types/user";
 
 interface ListProps extends TableProps<Project> {
   users: User[];

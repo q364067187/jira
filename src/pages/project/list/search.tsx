@@ -1,7 +1,7 @@
 // 加入下行可以在组件上使用css
 /** @jsxImportSource @emotion/react */
 import { Form, Input, Select } from "antd";
-import { User } from "./list";
+import { User } from "types/user";
 
 interface SearchProps {
   param: {

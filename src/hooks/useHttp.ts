@@ -35,9 +35,8 @@ export const http = async (
   const result = await res.json();
   if (res.ok) {
     return result;
-  } else {
-    return Promise.reject(result);
   }
+  return Promise.reject(result);
 };
 
 export const useHttp = () => {
