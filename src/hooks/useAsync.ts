@@ -45,9 +45,11 @@ export const useAsync = <D>(initialState?: State<D>) => {
     });
     try {
       const data = await promise;
-      return setData(data);
+      setData(data);
+      return Promise.resolve(data);
     } catch (error) {
-      return setError(error);
+      setError(error);
+      return Promise.reject(error);
     }
   };
 

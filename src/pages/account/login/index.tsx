@@ -1,18 +1,18 @@
 import { useAuth } from "contexts/auth";
-import { Button, Card, Divider, Form, Input } from "antd";
+import { Button, Card, Divider, Form, Input, Typography } from "antd";
 import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
+import { useState } from "react";
+import { useAsync } from "hooks/useAsync";
 
 const Login = () => {
   const { login } = useAuth();
-  const postLogin = (param: { username: string; password: string }) => {
-    login(param);
-  };
+  const { run, isLoading, error } = useAsync();
 
   const submitHandle = (values: { username: string; password: string }) => {
-    postLogin(values);
+    run(login(values));
   };
 
   return (
@@ -21,6 +21,9 @@ const Login = () => {
       <Background />
       <ShadowCade>
         <Title>请登录</Title>
+        {error ? (
+          <Typography.Text type="danger">{error.message}</Typography.Text>
+        ) : null}
         <Form onFinish={submitHandle}>
           <Form.Item
             name="username"
@@ -35,7 +38,7 @@ const Login = () => {
             <Input placeholder="密码" type="password" id="password" />
           </Form.Item>
           <Form.Item>
-            <LongButton htmlType="submit" type="primary">
+            <LongButton loading={isLoading} htmlType="submit" type="primary">
               登录
             </LongButton>
           </Form.Item>
