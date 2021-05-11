@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect } from "react";
 
 import * as auth from "auth-provider";
 import { User } from "types/user";
@@ -46,6 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     run(bootstrapUser());
+    // eslint-disable-next-line
   }, []);
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
