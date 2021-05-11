@@ -16,12 +16,17 @@ const ProductList = () => {
   const debounceParam = useDebounce(param, 200);
 
   const { isLoading, error, data: list } = useProjects(debounceParam);
-  const { data: users } = useUsers();
+  const { isLoading: isLoadingUsers, data: users } = useUsers();
 
   return (
     <Container>
       <h1>项目列表</h1>
-      <Search users={users || []} param={param} setParam={setParam} />
+      <Search
+        loading={isLoadingUsers}
+        users={users || []}
+        param={param}
+        setParam={setParam}
+      />
       {error ? (
         <Typography.Text type="danger">{error.message}</Typography.Text>
       ) : (

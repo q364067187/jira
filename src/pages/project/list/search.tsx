@@ -10,9 +10,10 @@ interface SearchProps {
   };
   setParam: (param: SearchProps["param"]) => void;
   users: User[];
+  loading: boolean;
 }
 
-const Search = ({ param, setParam, users }: SearchProps) => {
+const Search = ({ param, setParam, users, loading }: SearchProps) => {
   return (
     <Form css={{ marginBottom: "2rem" }} layout="inline">
       <Form.Item>
@@ -29,6 +30,7 @@ const Search = ({ param, setParam, users }: SearchProps) => {
       <Form.Item>
         <Select
           value={param.personId}
+          loading={loading}
           onChange={(value) =>
             setParam({
               ...param,
