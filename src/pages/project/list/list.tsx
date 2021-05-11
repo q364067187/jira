@@ -1,13 +1,6 @@
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
-
-export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  organization: string;
-  created: number;
-}
+import { Project } from "types/project";
 
 export interface User {
   id?: number;
