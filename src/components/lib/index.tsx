@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { Spin, Typography } from "antd";
+import { DevTools } from "jira-dev-tool";
 
 export const Row = styled.div<{
   // 子元素是否有右边距
@@ -23,3 +25,26 @@ export const Row = styled.div<{
         : undefined};
   }
 `;
+
+// 整页
+export const Fullpage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+// 整页读取
+export const FullpageLoading = () => (
+  <Fullpage>
+    <Spin size="large"></Spin>
+  </Fullpage>
+);
+
+// 整页报错
+export const FullpageError = ({ error }: { error: Error | null }) => (
+  <Fullpage>
+    <DevTools />
+    <Typography.Text type="danger">{error?.message}</Typography.Text>
+  </Fullpage>
+);

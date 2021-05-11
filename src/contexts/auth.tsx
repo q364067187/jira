@@ -3,6 +3,8 @@ import React, { ReactNode, useContext, useEffect, useState } from "react";
 import * as auth from "auth-provider";
 import { User } from "types/user";
 import { http } from "hooks/useHttp";
+import { useAsync } from "hooks/useAsync";
+import { FullpageError, FullpageLoading } from "components/lib";
 
 interface AuthForm {
   username: string;
@@ -32,15 +34,32 @@ const AuthContext = React.createContext<
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const {
+    run,
+    isLoading,
+    isIdle,
+    isError,
+    error,
+    data: user,
+    setData: setUser,
+  } = useAsync<User | null>();
 
   useEffect(() => {
-    bootstrapUser().then(setUser);
+    run(bootstrapUser());
   }, []);
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
+
+  if (isIdle || isLoading) {
+    return <FullpageLoading />;
+  }
+
+  if (isError) {
+    return <FullpageError error={error} />;
+  }
+
   return (
     <AuthContext.Provider
       children={children}
