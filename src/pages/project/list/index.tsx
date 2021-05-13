@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import styled from "@emotion/styled";
 import { useDebounce } from "utils/";
 import Search from "./search";
