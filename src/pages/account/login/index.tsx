@@ -5,10 +5,13 @@ import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
 import { useAsync } from "hooks/useAsync";
+import { useDocumentTitle } from "hooks/useDocumentTitle";
 
 const Login = () => {
   const { login } = useAuth();
   const { run, isLoading, error } = useAsync();
+
+  useDocumentTitle("登录");
 
   const submitHandle = (values: { username: string; password: string }) => {
     run(login(values));

@@ -6,6 +6,7 @@ import Search from "./search";
 import List from "./list";
 import { useProjects } from "hooks/biz/useProjects";
 import { useUsers } from "hooks/biz/useUsers";
+import { useDocumentTitle } from "hooks/useDocumentTitle";
 
 const ProductList = () => {
   const [param, setParam] = useState({
@@ -14,6 +15,8 @@ const ProductList = () => {
   });
 
   const debounceParam = useDebounce(param, 200);
+
+  useDocumentTitle("项目列表");
 
   const { isLoading, error, data: list } = useProjects(debounceParam);
   const { isLoading: isLoadingUsers, data: users } = useUsers();
