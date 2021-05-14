@@ -1,5 +1,6 @@
 import { useAuth } from "contexts/auth";
 import { Button, Card, Divider, Form, Input, Typography } from "antd";
+import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
@@ -45,7 +46,7 @@ const Login = () => {
             </LongButton>
           </Form.Item>
           <Divider />
-          <Button type="link">没有账号？注册新账号</Button>
+          <Link to="/register">没有账号？注册新账号</Link>
         </Form>
       </ShadowCade>
     </Container>

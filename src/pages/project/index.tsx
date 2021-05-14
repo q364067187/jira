@@ -1,49 +1,61 @@
 // 项目框架
-import styled from "@emotion/styled";
 import { Button, Dropdown, Menu } from "antd";
+import { Route, Routes, Navigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 import { useAuth } from "contexts/auth";
 import { Row } from "components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 
 import ProjectList from "./list/index";
+import ProjectDetail from "./detail/index";
 // 一些测试页面
 // import ProjectList from "./list-jsx/index";
 // import OldHome from "./old-home";
 // import PageUseArray from "./work-pages/use-array";
 
-const Project = () => {
+const PageHeader = () => {
   const { user, logout } = useAuth();
   return (
+    <Header between={true}>
+      <HeaderLeft gap={true}>
+        <SoftwareLogo width="20rem" />
+        <h2>项目</h2>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HederRight>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key="logout">
+                <Button onClick={logout} type="link">
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Button type="link" onClick={(e) => e.preventDefault()}>
+            Hi! {user?.name}
+          </Button>
+        </Dropdown>
+      </HederRight>
+    </Header>
+  );
+};
+
+const Project = () => {
+  return (
     <Container>
-      <Header between={true}>
-        <HeaderLeft gap={true}>
-          <SoftwareLogo width="20rem" />
-          <h2>项目</h2>
-          <h2>用户</h2>
-        </HeaderLeft>
-        <HederRight>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key="logout">
-                  <Button onClick={logout} type="link">
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Button type="link" onClick={(e) => e.preventDefault()}>
-              Hi! {user?.name}
-            </Button>
-          </Dropdown>
-        </HederRight>
-      </Header>
+      <PageHeader />
       <Main>
-        <ProjectList />
-        {/* <OldHome /> */}
-        {/* <PageUseArray /> */}
+        <Routes>
+          <Route path="/projects" element={<ProjectList />} />
+          <Route path="/projects/:projectId/*" element={<ProjectDetail />} />
+          {/* <OldHome /> */}
+          {/* <PageUseArray /> */}
+          <Navigate to="/projects" />
+        </Routes>
       </Main>
     </Container>
   );
