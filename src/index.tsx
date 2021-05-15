@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { loadServer, DevTools } from "jira-dev-tool";
+import { loadServer } from "jira-dev-tool";
 import { AppProvider } from "contexts";
 
 // 引入antd样式, 务必在jira-dev-tool后面引入
@@ -14,7 +14,6 @@ loadServer(() =>
   ReactDOM.render(
     <React.StrictMode>
       <AppProvider>
-        <DevTools />
         <App />
       </AppProvider>
     </React.StrictMode>,

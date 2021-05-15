@@ -1,3 +1,5 @@
+// 加入下行可以在组件上使用css
+/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { Spin, Typography } from "antd";
 import { DevTools } from "jira-dev-tool";
@@ -48,3 +50,17 @@ export const FullpageError = ({ error }: { error: Error | null }) => (
     <Typography.Text type="danger">{error?.message}</Typography.Text>
   </Fullpage>
 );
+
+const isError = (value: any): value is Error => value?.message;
+
+export const ErrorBox = ({ error }: { error: unknown }) => {
+  if (isError(error)) {
+    return (
+      <Typography.Text type="danger">
+        <div css={{ marginBottom: "10px" }}>{error?.message}</div>
+      </Typography.Text>
+    );
+  } else {
+    return null;
+  }
+};

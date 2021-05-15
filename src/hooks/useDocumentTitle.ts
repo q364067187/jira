@@ -7,5 +7,6 @@ export const useDocumentTitle = (title: string) => {
     return () => {
       document.title = oldTitle;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title]);
 };

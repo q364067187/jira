@@ -1,12 +1,16 @@
 import { useAuth } from "contexts/auth";
-import { Button, Card, Divider, Form, Input, Typography } from "antd";
+import { Button, Divider, Form, Input } from "antd";
 import { Link } from "react-router-dom";
-import styled from "@emotion/styled";
-import logo from "assets/logo.svg";
-import left from "assets/left.svg";
-import right from "assets/right.svg";
 import { useAsync } from "hooks/useAsync";
 import { useDocumentTitle } from "hooks/useDocumentTitle";
+import { ErrorBox } from "components/lib";
+import {
+  Header,
+  Background,
+  ShadowCard,
+  Title,
+  Container,
+} from "../common/lib";
 
 const Login = () => {
   const { login } = useAuth();
@@ -22,11 +26,9 @@ const Login = () => {
     <Container>
       <Header />
       <Background />
-      <ShadowCade>
+      <ShadowCard>
         <Title>请登录</Title>
-        {error ? (
-          <Typography.Text type="danger">{error.message}</Typography.Text>
-        ) : null}
+        <ErrorBox error={error} />
         <Form onFinish={submitHandle}>
           <Form.Item
             name="username"
@@ -41,61 +43,16 @@ const Login = () => {
             <Input placeholder="密码" type="password" id="password" />
           </Form.Item>
           <Form.Item>
-            <LongButton loading={isLoading} htmlType="submit" type="primary">
+            <Button loading={isLoading} htmlType="submit" type="primary" block>
               登录
-            </LongButton>
+            </Button>
           </Form.Item>
           <Divider />
           <Link to="/register">没有账号？注册新账号</Link>
         </Form>
-      </ShadowCade>
+      </ShadowCard>
     </Container>
   );
 };
-
-export const LongButton = styled(Button)`
-  width: 100%;
-`;
-
-const Header = styled.header`
-  background: url(${logo}) no-repeat center;
-  padding: 5rem 0;
-  background-size: 8rem;
-  width: 100%;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 2.4rem;
-  color: rgb(94, 108, 132);
-`;
-
-const Background = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: left bottom, right bottom;
-  background-size: calc(((100vw - 40rem) / 2) - 3.2rem),
-    calc(((100vw - 40rem) / 2) - 3.2rem), cover;
-  background-image: url(${left}), url(${right});
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-`;
-
-const ShadowCade = styled(Card)`
-  width: 40rem;
-  min-height: 46rem;
-  padding: 3.2rem 4rem;
-  border-radius: 0.3rem;
-  box-sizing: border-box;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-`;
 
 export default Login;
