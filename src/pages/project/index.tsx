@@ -5,21 +5,25 @@ import styled from "@emotion/styled";
 
 import { useAuth } from "contexts/auth";
 import { Row } from "components/lib";
+import { resetRouter } from "utils";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 
 import ProjectList from "./list/index";
 import ProjectDetail from "./detail/index";
+
 // 一些测试页面
-// import ProjectList from "./list-jsx/index";
-// import OldHome from "./old-home";
-// import PageUseArray from "./work-pages/use-array";
+// import ProjectList from "./listJsx/index";
+// import OldHome from "./oldHome";
+// import PageUseArray from "./workPages/useArray";
 
 const PageHeader = () => {
   const { user, logout } = useAuth();
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <SoftwareLogo width="20rem" />
+        <Button type="link" onClick={resetRouter}>
+          <SoftwareLogo width="18rem" />
+        </Button>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>

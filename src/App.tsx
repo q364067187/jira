@@ -1,5 +1,5 @@
 // 总页面
-import ErrorBoundary from "components/ErrorBoundary";
+import ErrorBoundary from "components/errorBoundary";
 import { FullpageError } from "components/lib";
 import { useAuth } from "contexts/auth";
 import Login from "pages/account/login";

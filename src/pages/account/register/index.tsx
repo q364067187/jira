@@ -2,6 +2,7 @@ import { useAuth } from "contexts/auth";
 import { Button, Divider, Form, Input } from "antd";
 
 import { useAsync } from "hooks/useAsync";
+import { useDocumentTitle } from "hooks/useDocumentTitle";
 import { ErrorBox } from "components/lib";
 import {
   Header,
@@ -14,6 +15,8 @@ import {
 const Register = () => {
   const { register } = useAuth();
   const { run, isLoading, error, setError } = useAsync();
+
+  useDocumentTitle("注册");
 
   const goBack = () => {
     window.history.back();

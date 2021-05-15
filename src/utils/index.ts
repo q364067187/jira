@@ -52,3 +52,8 @@ export const useArray = <V>(persons: V[]) => {
     add,
   };
 };
+
+// 重置路由
+export const resetRouter = () => {
+  window.location.href = window.location.origin;
+};
