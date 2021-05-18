@@ -1,11 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 
-export const useUrlQueryParam = (keys: string[]) => {
+export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   const [searchParam, setSearchParam] = useSearchParams();
   return [
     keys.reduce((prev, key) => {
       return { ...prev, [key]: searchParam.get(key) || "" };
-    }, {} as { [key in string]: string }),
+    }, {} as { [key in K]: string }),
     setSearchParam,
   ] as const;
 };
