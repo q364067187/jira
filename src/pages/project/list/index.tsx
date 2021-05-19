@@ -10,13 +10,7 @@ import { useDocumentTitle } from "hooks/useDocumentTitle";
 import { useUrlQueryParam } from "hooks/useUrlQueryParam";
 
 const ProductList = () => {
-  const [, setParam] = useState({
-    name: "",
-    personId: "",
-  });
-
-  const [param] = useUrlQueryParam(["name", "personId"]);
-
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   const debounceParam = useDebounce(param, 200);
   console.log(debounceParam);
 
@@ -43,7 +37,7 @@ const ProductList = () => {
   );
 };
 
-ProductList.whyDidYouRender = true;
+ProductList.whyDidYouRender = false;
 
 const Container = styled.div``;
 
