@@ -1,13 +1,14 @@
 // 加入下行可以在组件上使用css
 /** @jsxImportSource @emotion/react */
-import { Form, Input, Select } from "antd";
+import { Form, Input } from "antd";
+import { IdSelect } from "components/idSelect";
 import { User } from "types/user";
 
 interface SearchProps {
-  param: {
+  param: Partial<{
     name: string;
-    personId: string;
-  };
+    personId: number;
+  }>;
   setParam: (param: SearchProps["param"]) => void;
   users: User[];
   loading: boolean;
@@ -28,8 +29,10 @@ const Search = ({ param, setParam, users, loading }: SearchProps) => {
         />
       </Form.Item>
       <Form.Item>
-        <Select
+        <IdSelect
           value={param.personId}
+          defaultValue="请选择负责人"
+          options={users}
           loading={loading}
           onChange={(value) =>
             setParam({
@@ -37,14 +40,7 @@ const Search = ({ param, setParam, users, loading }: SearchProps) => {
               personId: value,
             })
           }
-        >
-          <Select.Option value="">请选择负责人</Select.Option>
-          {users.map((user) => (
-            <Select.Option key={user.id} value={String(user.id) || ""}>
-              {user.name}
-            </Select.Option>
-          ))}
-        </Select>
+        />
       </Form.Item>
     </Form>
   );

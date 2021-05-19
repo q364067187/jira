@@ -7,12 +7,11 @@ import List from "./list";
 import { useProjects } from "hooks/biz/useProjects";
 import { useUsers } from "hooks/biz/useUsers";
 import { useDocumentTitle } from "hooks/useDocumentTitle";
-import { useUrlQueryParam } from "hooks/useUrlQueryParam";
+import useProjectSearchParams from "./utils/useProjectSearchParams";
 
 const ProductList = () => {
-  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
+  const [param, setParam] = useProjectSearchParams();
   const debounceParam = useDebounce(param, 200);
-  console.log(debounceParam);
 
   useDocumentTitle("项目列表");
 
